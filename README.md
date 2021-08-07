@@ -10,22 +10,26 @@
 
 **Formatação**
 
-- `render: <valor>` Define o conteúdo a ser exibido, podendo ser uma imagem ou um elemento
-- `image-scale: <valor>` Para imagens, configura a exibição, cover e centralizado ou tamanho original ajustado ao tamanho máximo do carrossel
+- `view_type: <valor>` Define o conteúdo a ser exibido, podendo ser uma imagem ou um elemento
+- `render: <valor>` Seta o valor a ser exibido, se imagem um link e se um elemento, a estrutura a ser criada
+- `image_scale: <valor>` Para imagens, configura a exibição, cover e centralizado ou tamanho original ajustado ao tamanho máximo do carrossel
 - `loop: <valor>` Se ativado, quando clicado para a próxima exibição e não houver mais, retorna para a primeira
   
 
 **Setas**
 
-- `arrow-distance: <valor>` Define o distanciamento das setas das extremidades
-- `arrow-color: <valor>` Configuração de cor das setas
+- `arrow_distance: <valor>` Define o distanciamento das setas das extremidades
+- `arrow_color: <valor>` Configuração de cor das setas
 
 **Tempo e Contadores**
 
-- `transition-time: <valor>` Configura o tempo que leva para transitar entre exibições
+- `transition_time: <valor>` Configura o tempo que leva para transitar entre exibições
 - `autoplay: <valor>` Se ativado, define um tempo automático de transição
-- `autoplay-time: <valor>` Quando autoplay está ativado, define o tempo entre as transições automáticas
-
+- `autoplay_time: <valor>` Quando autoplay está ativado, define o tempo entre as transições automáticas
 - `counter: <valor>` Configura para aparecer os contadores de exibições na parte inferior
-- `counter-color: <valor>` Configuração de cor padrão dos contadores
-- `counter-color-selected: <valor>` Configuração de cor quando o contador está ativo
+- `counter_color: <valor>` Configuração de cor padrão dos contadores
+- `counter_color_selected: <valor>` Configuração de cor quando o contador está ativo
+
+#### Reports
+
+> A primeira transição não apresenta tempo de transição, posteriormente se normaliza
