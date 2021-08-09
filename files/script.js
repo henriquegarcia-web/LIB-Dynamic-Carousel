@@ -1,7 +1,7 @@
 (async function () {
   new SliderController({
     loop: true,
-    transition_time: 1,
+    transition_time: 0.5,
     autoplay: true,
     autoplay_time: 1,
     counter: true
@@ -34,6 +34,8 @@ function SliderController(configs) {
   }
 
   this.renderConfigs = (configs) => {
+    document.documentElement.style.setProperty('--counter-transition-time', `${configs.transition_time}s`)
+
     if (configs.loop) {
       if (configs.autoplay) {
         this.sliderControl(true, true)
@@ -181,7 +183,6 @@ function SliderController(configs) {
         const newWidth = (indexPosition - 1) * - widthCarousel
         index = parseInt(indexPosition)
         currentWidth = newWidth
-        console.log(currentWidth)
 
         carouselView.style.left = `${newWidth}px`
         this.counterControl(indexPosition)

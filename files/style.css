@@ -1,3 +1,7 @@
+:root {
+  --counter-transition-time: 1s;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -70,6 +74,7 @@
   width: 15px;
   margin: 0 4px;
   border-radius: 50%;
+  transition: var(--counter-transition-time) ease-in-out;
 }
 
 .dc-carousel-counter:hover {
