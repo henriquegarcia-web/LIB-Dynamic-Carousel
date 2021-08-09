@@ -38,6 +38,34 @@
   background-image: url('https://picsum.photos/1100/800');
 }
 
+.dc-carousel-counters {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  margin-bottom: 10px;
+}
+
+.dc-carousel-counter {
+  background-color: rgba(245, 245, 245, 0.6);
+  border: 3px solid rgb(140, 140, 140);
+  height: 15px;
+  width: 15px;
+  margin: 0 4px;
+  border-radius: 50%;
+}
+
+.dc-carousel-counter:hover {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: rgba(100, 100, 100, 0.6);
+  border: 3px solid rgb(80, 80, 80);
+}
+
 /* ------------------------------------------- */
 
 .default__arrow {
