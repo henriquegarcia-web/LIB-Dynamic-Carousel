@@ -1,6 +1,6 @@
 ### LIB - Dynamic Carousel
 
-#### Escopo
+#### ESCOPO
 
 **Inserção:** Para usar o *DynamicCarousel*, crie um elemento baseado em 3 classes: O elemento pai, que representa a área de visualização do carrossel *(dc-carousel)*, o elemento que irá conter todos os slides *(dc-carousel-slides)* e os slides *(dc-carousel-slide)*. A função irá automaticamente criar um container das setas e dos contadores de sliders, ambos configuráveis.
 
@@ -14,7 +14,7 @@
 
 ###
 
-#### Variáveis de manipulação
+#### VARIÁVEIS DE MANIPULAÇÃO
 
 **Formatação geral**
 
