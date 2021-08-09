@@ -1,31 +1,35 @@
 (async function () {
-  new SliderController().start()
+  new SliderController({
+    loop: true,
+    transition_time: 1,
+    autoplay: true,
+    autoplay_time: 2
+  }).start()
 })()
 
-function SliderController() {
+// const configs = {
+//   'loop' : true/false,
+//   'transition_time' : 1, tempo deve ser em segundos
+//   'autoplay' : true/false,
+//   'autoplay_time' : 2, tempo deve ser em segundos
+//   'counter' : true/false
+// }
+
+function SliderController(configs) {
 
   const carouselContainer = document.querySelector('.dc-carousel')
   const carouselView = document.querySelector('.dc-carousel-slides')
   const carouselSliders = document.querySelectorAll('.dc-carousel-slide')
-  const carouselCounter = document.querySelector('.dc-carousel-counters')
 
   const arrowElements = document.querySelectorAll('.default__arrow')
-
-  const configs = {
-    'loop' : true,
-    'transition_time' : '1',
-    'autoplay' : true,
-    'autoplay_time' : '2',
-    'counter' : true
-  }
 
   let slidesCounter = 0
   let currentWidth = 0
   let index = 1
 
-  this.start = async () => {
-    await this.getSlides()
-    await this.renderConfigs(configs)
+  this.start = () => {
+    this.getSlides()
+    this.renderConfigs(configs)
   }
 
   this.renderConfigs = (configs) => {
@@ -40,13 +44,17 @@ function SliderController() {
     }
 
     if (configs.counter) {
-      // const counterElement = document.createElement('div')
-      // counterElement.classList.add('dc-carousel-counter')
+      const counterContainer = document.createElement('div')
+      counterContainer.classList.add('dc-carousel-counters')
 
-      // for (var i = 0; i < 10; i++) {
-      //   console.log(i)
-      //   carouselCounter.appendChild(counterElement)
-      // }
+      for (let i = 0; i < parseInt(slidesCounter); i++) {
+        const counter = document.createElement('div')
+        counter.classList.add('dc-carousel-counter')
+        if (i == 0) counter.classList.add('selected')
+        counterContainer.appendChild(counter)
+      }
+
+      carouselContainer.appendChild(counterContainer)
       this.counterControl()
     }
 
