@@ -4,87 +4,125 @@
 
 function SliderController() {
 
-  const imagesSlider = document.querySelector('.default__images__container') // Retorna o elemento que contém todos os slides
-
-  const generalConfigs = [
-    {
-      'loop':'active',
-      'transition_time':'1',
-      'counter':'active',
-      'autoplay':'desactive'
-    }
-  ]
-
-  const viewsConfigs = [
-    {
-      'view_type':'image',
-      'render':'https://picsum.photos/1200/800',
-      'image_scale':'full'
-    },
-    {
-      'view_type':'image',
-      'render':'https://picsum.photos/600/1000',
-      'image_scale':'size'
-    },
-    {
-      'view_type':'element',
-      'render':'<div class="render__div"></div>',
-      'image_scale':''
-    }
-  ]
+  const carouselContainer = document.querySelector('.dc-carousel')        // Retorna o carrossel, onde é renderizado os slides
+  const carouselView = document.querySelector('.dc-carousel-slides')      // Retorna o elemento que contém todos os slides
+  const carouselSliders = document.querySelectorAll('.dc-carousel-slide') // Retorna cada slide existente no carrossel
 
   const arrowElements = document.querySelectorAll('.default__arrow')
-  let imagesCounter = 0
+
+  const configs = {
+    'loop' : true,
+    'transition_time' : '1',
+    'autoplay' : true,
+    'autoplay_time' : '2',
+    'counter' : true
+  }
+
+  let slidesCounter = 0
   let currentWidth = 0
 
   this.start = async () => {
-    await this.renderConfigs(generalConfigs, viewsConfigs)
-    await this.getImages()
-    this.onClickArrow()
+    await this.renderConfigs(configs)
+    await this.getSlides()
   }
 
-  this.renderConfigs = (general, views) => {
+  this.renderConfigs = (general) => {
     console.log(general)
-    console.log(views)
 
-    console.log()
+    if (general.loop) {
+      if (general.autoplay) {
+        this.sliderControl(true, true)
+      } else {
+        this.sliderControl(true, false)
+      }
+    } else {
+      this.sliderControl(false)
+    }
 
-    imagesSlider.style.transition = general[0].transition_time ? `all ${general[0].transition_time}s` : "all 0.5s" // Configura o tempo de transição dos slides
+    carouselView.style.transition = general.transition_time ? `all ${general.transition_time}s` : "all 0.5s"
   }
 
-  this.getImages = () => {
-    Array.from(document.querySelectorAll('.default__image')).forEach((ele, i) => {
-      ele.setAttribute('data-position', i)
-      imagesCounter += 1
+  this.getSlides = () => {
+    Array.from(carouselSliders).forEach(() => {
+      slidesCounter += 1
     })
   }
 
-  this.onClickArrow = () => {
-    let index = 0
+  this.sliderControl = (loop, autoplay) => {
+    const widthCarousel = carouselContainer.offsetWidth
+    let index = 1
 
-    arrowElements.forEach(ele => ele.addEventListener('click', () => {
-      if (ele.classList.contains('left')) {
-        if (index - 1 < 0) return
-        index -= 1
-        this._moveImage('left')
-      } else {
-        if (index + 1 == imagesCounter) return
-        index += 1
-        this._moveImage('right')
-      }
-    }))
-  }
+    carouselView.style.left = `${currentWidth}px`
 
-  this._moveImage = (to) => {
-    const carouselContainer = document.querySelector('.default__carousel')
-    const widthCarousel = carouselContainer.offsetWidth // Retorna a largura do container onde está sendo exibido o carrossel
+    switch (loop) {
+      case true:
+        arrowElements.forEach(ele => ele.addEventListener('click', () => {
+          if (ele.classList.contains('left')) {
+            if (index - 1 < 1) {
+              index = slidesCounter
+              currentWidth = (slidesCounter - 1) * -widthCarousel
+              carouselView.style.left = `${currentWidth}px`
+              return
+            }
+            index -= 1
+            currentWidth += widthCarousel
+            carouselView.style.left = `${currentWidth}px`
+            return
+          } else {
+            if (index + 1 > slidesCounter) {
+              index = 1
+              currentWidth = 0
+              carouselView.style.left = `${currentWidth}px`
+              return
+            }
+            index += 1
+            currentWidth -= widthCarousel
+            carouselView.style.left = `${currentWidth}px`
+            return
+          }
+        }))
 
-    if (to == 'left') {
-      currentWidth += widthCarousel
-      imagesSlider.style.left = `${currentWidth}px`
-    } else {
-      currentWidth -= widthCarousel
-      imagesSlider.style.left = `${currentWidth}px`
+        if (autoplay) {
+          setInterval(() => { 
+            if (index + 1 > slidesCounter) {
+              index = 1
+              currentWidth = 0
+              carouselView.style.left = `${currentWidth}px`
+              return
+            }
+            index += 1
+            currentWidth -= widthCarousel
+            carouselView.style.left = `${currentWidth}px`
+          }, configs.autoplay_time * 1000 + configs.transition_time * 1000);
+        }
+        break
+
+      case false:
+        arrowElements.forEach(ele => ele.addEventListener('click', () => {
+          if (ele.classList.contains('left')) {
+            if (index - 1 < 1) return
+            index -= 1
+            currentWidth += widthCarousel
+            carouselView.style.left = `${currentWidth}px`
+          } else {
+            if (index + 1 > slidesCounter) return
+            index += 1
+            currentWidth -= widthCarousel
+            carouselView.style.left = `${currentWidth}px`
+          }
+        }))
+
+        // ADICIONAR OU NÃO AUTOPLAY QUANDO NÃO HOVER LOOP ?
+
+        // if (autoplay) {
+        //   setInterval(() => { 
+        //     if (index + 1 > slidesCounter) return
+        //     index += 1
+        //     currentWidth -= widthCarousel
+        //     carouselView.style.left = `${currentWidth}px`
+        //   }, configs.autoplay_time * 1000 + configs.transition_time * 1000);
+        // }
+        break
     }
   }
 }
