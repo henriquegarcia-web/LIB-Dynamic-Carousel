@@ -10,21 +10,23 @@
 
 **Manipulação:** É possível modificar o funcionamento do carrossel, passando para função variáveis manipuladoras.
 
+<img src="files/images/screenshot_configs.png">
+
 ###
 
 #### Variáveis de manipulação
 
 **Formatação geral**
 
-`loop: <valor>` Se ativado, quando clicado para a próxima exibição e não houver mais, retorna para a primeira
+`loop: (true/false)` Se ativado, quando clicado para a próxima exibição e não houver mais, retorna para a primeira
 
 **Tempo e Contadores**
 
-`transition_time: <valor>` Configura o tempo que leva para transitar entre exibições
-`autoplay: <valor>` Se ativado, define um tempo automático de transição
-`autoplay_time: <valor>` Quando autoplay está ativado, define o tempo entre as transições automáticas
-`counter: <valor>` Configura para aparecer os contadores de exibições na parte inferior
+`transition_time: (X segundos)` Configura o tempo que leva para transitar entre exibições
+`autoplay: (true/false)` Se ativado, define um tempo automático de transição
+`autoplay_time: (X segundos)` Quando autoplay está ativado, define o tempo entre as transições automáticas
+`counter: (true/false)` Configura para aparecer os contadores de exibições na parte inferior
 
 #### Reports
 
-> A primeira transição não apresenta tempo de transição, posteriormente se normaliza
+> [ Resolvido ] - A primeira transição não apresenta tempo de transição, posteriormente se normaliza

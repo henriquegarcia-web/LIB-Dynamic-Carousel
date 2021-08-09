@@ -4,9 +4,9 @@
 
 function SliderController() {
 
-  const carouselContainer = document.querySelector('.dc-carousel')        // Retorna o carrossel, onde é renderizado os slides
-  const carouselView = document.querySelector('.dc-carousel-slides')      // Retorna o elemento que contém todos os slides
-  const carouselSliders = document.querySelectorAll('.dc-carousel-slide') // Retorna cada slide existente no carrossel
+  const carouselContainer = document.querySelector('.dc-carousel')
+  const carouselView = document.querySelector('.dc-carousel-slides')
+  const carouselSliders = document.querySelectorAll('.dc-carousel-slide')
 
   const arrowElements = document.querySelectorAll('.default__arrow')
 
@@ -27,8 +27,6 @@ function SliderController() {
   }
 
   this.renderConfigs = (general) => {
-    console.log(general)
-
     if (general.loop) {
       if (general.autoplay) {
         this.sliderControl(true, true)
