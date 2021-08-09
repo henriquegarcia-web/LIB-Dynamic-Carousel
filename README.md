@@ -18,14 +18,14 @@
 
 **Formatação geral**
 
-`loop: (true/false)` Se ativado, quando clicado para a próxima exibição e não houver mais, retorna para a primeira
+- `loop: (true/false)` Se ativado, quando clicado para a próxima exibição e não houver mais, retorna para a primeira
 
 **Tempo e Contadores**
 
-`transition_time: (X segundos)` Configura o tempo que leva para transitar entre exibições
-`autoplay: (true/false)` Se ativado, define um tempo automático de transição
-`autoplay_time: (X segundos)` Quando autoplay está ativado, define o tempo entre as transições automáticas
-`counter: (true/false)` Configura para aparecer os contadores de exibições na parte inferior
+- `transition_time: (X segundos)` Configura o tempo que leva para transitar entre exibições
+- `autoplay: (true/false)` Se ativado, define um tempo automático de transição
+- `autoplay_time: (X segundos)` Quando autoplay está ativado, define o tempo entre as transições automáticas
+- `counter: (true/false)` Configura para aparecer os contadores de exibições na parte inferior
 
 #### Reports
 
