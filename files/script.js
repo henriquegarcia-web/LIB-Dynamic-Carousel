@@ -3,7 +3,8 @@
     loop: true,
     transition_time: 1,
     autoplay: true,
-    autoplay_time: 2
+    autoplay_time: 1,
+    counter: true
   }).start()
 })()
 
@@ -68,23 +69,24 @@ function SliderController(configs) {
   }
 
   this.sliderControl = (loop, autoplay) => {
-    const widthCarousel = carouselContainer.offsetWidth
-
     carouselView.style.left = `${currentWidth}px`
 
     switch (loop) {
       case true:
         arrowElements.forEach(ele => ele.addEventListener('click', () => {
+          const widthCarousel = carouselContainer.offsetWidth
+
           if (ele.classList.contains('left')) {
             if (index - 1 < 1) {
               index = slidesCounter
-              currentWidth = (slidesCounter - 1) * -widthCarousel
+              currentWidth = (index - 1) * - widthCarousel
               carouselView.style.left = `${currentWidth}px`
               this.counterControl(index)
               return
             }
+
             index -= 1
-            currentWidth += widthCarousel
+            currentWidth = (index - 1) * - widthCarousel
             carouselView.style.left = `${currentWidth}px`
             this.counterControl(index)
             return
@@ -96,8 +98,9 @@ function SliderController(configs) {
               this.counterControl(index)
               return
             }
+
             index += 1
-            currentWidth -= widthCarousel
+            currentWidth = (index - 1) * - widthCarousel
             carouselView.style.left = `${currentWidth}px`
             this.counterControl(index)
             return
@@ -106,6 +109,10 @@ function SliderController(configs) {
 
         if (autoplay) {
           setInterval(() => { 
+            const widthCarousel = carouselContainer.offsetWidth
+
+            carouselView.style.left = `${currentWidth}px`
+
             if (index + 1 > slidesCounter) {
               index = 1
               currentWidth = 0
@@ -114,7 +121,7 @@ function SliderController(configs) {
               return
             }
             index += 1
-            currentWidth -= widthCarousel
+            currentWidth = (index - 1) * - widthCarousel
             carouselView.style.left = `${currentWidth}px`
             this.counterControl(index)
           }, configs.autoplay_time * 1000 + configs.transition_time * 1000);
@@ -123,6 +130,8 @@ function SliderController(configs) {
 
       case false:
         arrowElements.forEach(ele => ele.addEventListener('click', () => {
+          const widthCarousel = carouselContainer.offsetWidth
+
           if (ele.classList.contains('left')) {
             if (index - 1 < 1) return
             index -= 1
@@ -167,7 +176,15 @@ function SliderController(configs) {
       ele.setAttribute('index', i+1)
 
       ele.addEventListener('click', (ele) => {
-        console.log(ele.path[0].getAttribute('index'))
+        const indexPosition = ele.path[0].getAttribute('index')
+        const widthCarousel = carouselContainer.offsetWidth
+        const newWidth = (indexPosition - 1) * - widthCarousel
+        index = parseInt(indexPosition)
+        currentWidth = newWidth
+        console.log(currentWidth)
+
+        carouselView.style.left = `${newWidth}px`
+        this.counterControl(indexPosition)
       })
     })
   }
