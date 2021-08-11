@@ -21,8 +21,7 @@ function SliderController(configs) {
   const carouselContainer = document.querySelector('.dc-carousel')
   const carouselView = document.querySelector('.dc-carousel-slides')
   const carouselSliders = document.querySelectorAll('.dc-carousel-slide')
-
-  const arrowElements = document.querySelectorAll('.default__arrow')
+  const carouselArrows = document.querySelectorAll('.dc-carousel-arrows')
 
   let slidesCounter = 0
   let currentWidth = 0
@@ -30,6 +29,7 @@ function SliderController(configs) {
 
   this.start = () => {
     this.getSlides()
+    this.startArrows()
     this.renderConfigs(configs)
   }
 
@@ -70,12 +70,55 @@ function SliderController(configs) {
     })
   }
 
+  this.startArrows = (loop) => {
+    carouselArrows.forEach(arrow => {
+      const arrowSide = arrow.classList
+      if (arrowSide.contains('left')) {
+        const widthCarousel = carouselContainer.offsetWidth
+
+        if (index - 1 < 1 && !loop) return
+
+        if (index - 1 < 1 && loop) {
+          index = slidesCounter
+          currentWidth = (index - 1) * - widthCarousel
+          carouselView.style.left = `${currentWidth}px`
+          this.counterControl(index)
+          return
+        }
+
+        index -= 1
+        currentWidth = (index - 1) * - widthCarousel
+        carouselView.style.left = `${currentWidth}px`
+        this.counterControl(index)
+        return
+      }
+
+      if (arrowSide.contains('right')) {
+        if (index + 1 > slidesCounter && !loop) return
+
+        if (index + 1 > slidesCounter && loop) {
+          index = 1
+          currentWidth = 0
+          carouselView.style.left = `${currentWidth}px`
+          this.counterControl(index)
+          return
+        }
+
+        index += 1
+        currentWidth = (index - 1) * - widthCarousel
+        carouselView.style.left = `${currentWidth}px`
+        this.counterControl(index)
+        return
+      }
+    })
+  }
+
   this.sliderControl = (loop, autoplay) => {
     carouselView.style.left = `${currentWidth}px`
 
     switch (loop) {
       case true:
-        arrowElements.forEach(ele => ele.addEventListener('click', () => {
+        carouselArrows.forEach(ele => ele.addEventListener('click', () => {
           const widthCarousel = carouselContainer.offsetWidth
 
           if (ele.classList.contains('left')) {
@@ -131,7 +174,7 @@ function SliderController(configs) {
         break
 
       case false:
-        arrowElements.forEach(ele => ele.addEventListener('click', () => {
+        carouselArrows.forEach(ele => ele.addEventListener('click', () => {
           const widthCarousel = carouselContainer.offsetWidth
 
           if (ele.classList.contains('left')) {

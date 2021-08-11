@@ -88,7 +88,7 @@
 
 /* ------------------------------------------- */
 
-.default__arrow {
+.dc-carousel-arrows {
   display: flex;
   position: absolute;
   top: 50%;
@@ -96,24 +96,24 @@
   z-index: 1;
 }
 
-.default__arrow:hover{
+.dc-carousel-arrows:hover{
   cursor: pointer;
 }
 
-.default__arrow img {
+.dc-carousel-arrows img {
   width: 50px;
   height: 50px;
 }
 
-.default__arrow.left img {
+.dc-carousel-arrows.left img {
   transform: rotate(180deg);
 }
 
-.default__arrow.left {
+.dc-carousel-arrows.left {
   margin-left: 10px;
 }
 
-.default__arrow.right {
+.dc-carousel-arrows.right {
   margin-right: 10px;
   right: 0;
 }
